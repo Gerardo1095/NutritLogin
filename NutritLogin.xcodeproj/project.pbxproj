@@ -15,6 +15,7 @@
 		AF7DFCFF243C187900DFD370 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFCFE243C187900DFD370 /* SignupViewController.swift */; };
 		AF7DFD01243C18AB00DFD370 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFD00243C18AB00DFD370 /* ForgotPasswordViewController.swift */; };
 		AF7DFD03243C239600DFD370 /* StartedSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFD02243C239600DFD370 /* StartedSessionViewController.swift */; };
+		AF7DFD0B243C4A7500DFD370 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFD0A243C4A7500DFD370 /* MessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		AF7DFCFE243C187900DFD370 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		AF7DFD00243C18AB00DFD370 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		AF7DFD02243C239600DFD370 /* StartedSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedSessionViewController.swift; sourceTree = "<group>"; };
+		AF7DFD0A243C4A7500DFD370 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				AF7DFD00243C18AB00DFD370 /* ForgotPasswordViewController.swift */,
+				AF7DFD0A243C4A7500DFD370 /* MessageView.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				AF7DFD01243C18AB00DFD370 /* ForgotPasswordViewController.swift in Sources */,
 				AF7DFCFF243C187900DFD370 /* SignupViewController.swift in Sources */,
 				AF7DFCFD243C186900DFD370 /* LoginViewController.swift in Sources */,
+				AF7DFD0B243C4A7500DFD370 /* MessageView.swift in Sources */,
 				AF7DFD03243C239600DFD370 /* StartedSessionViewController.swift in Sources */,
 				AF7DFCE5243C166C00DFD370 /* AppDelegate.swift in Sources */,
 			);
