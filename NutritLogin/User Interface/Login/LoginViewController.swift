@@ -50,15 +50,15 @@ class LoginViewController: UIViewController {
         return passwordTextField
     }()
     
-    lazy var logingButton: UIButton = {
-        let logingButton = UIButton()
-        logingButton.setTitle("Loging", for: .normal)
-        logingButton.setTitleColor(.white, for: .normal)
-        logingButton.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
-        logingButton.layer.cornerRadius = 5
-        logingButton.addTarget(self, action: #selector(logingNow), for: .touchUpInside)
-        logingButton.translatesAutoresizingMaskIntoConstraints = false
-        return logingButton
+    lazy var loginButton: UIButton = {
+        let loginButton = UIButton()
+        loginButton.setTitle("Loging", for: .normal)
+        loginButton.setTitleColor(.white, for: .normal)
+        loginButton.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
+        loginButton.layer.cornerRadius = 5
+        loginButton.addTarget(self, action: #selector(logingNow), for: .touchUpInside)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        return loginButton
     }()
     
     lazy var signUpButton: UIButton = {
@@ -87,8 +87,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc func logingNow() {
-        /*let loging = LogingViewController()
-        navigationController?.pushViewController(loging, animated: true)*/
+        let loging = StartedSessionViewController()
+        navigationController?.pushViewController(loging, animated: true)
     }
     
     @objc func signUpNow() {
@@ -109,7 +109,7 @@ class LoginViewController: UIViewController {
         view.addSubview(alertLabel)
         view.addSubview(loginTextField)
         view.addSubview(passwordTextField)
-        view.addSubview(logingButton)
+        view.addSubview(loginButton)
         view.addSubview(signUpButton)
         view.addSubview(forgotButton)
         
@@ -132,16 +132,16 @@ class LoginViewController: UIViewController {
         passwordTextField.leadingAnchor.constraint(equalTo: loginTextField.leadingAnchor).isActive = true
         passwordTextField.trailingAnchor.constraint(equalTo: loginTextField.trailingAnchor).isActive = true
         
-        logingButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
-        logingButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor).isActive = true
-        logingButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor).isActive = true
-        logingButton.heightAnchor.constraint(equalToConstant: 40)
+        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+        loginButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor).isActive = true
+        loginButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 40)
         
-        signUpButton.topAnchor.constraint(equalTo: logingButton.bottomAnchor, constant: 7).isActive = true
-        signUpButton.leadingAnchor.constraint(equalTo: logingButton.leadingAnchor).isActive = true
+        signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 7).isActive = true
+        signUpButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor).isActive = true
         
-        forgotButton.topAnchor.constraint(equalTo: logingButton.bottomAnchor, constant: 7).isActive = true
-        forgotButton.trailingAnchor.constraint(equalTo: logingButton.trailingAnchor).isActive = true
+        forgotButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 7).isActive = true
+        forgotButton.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor).isActive = true
         
     }
     
