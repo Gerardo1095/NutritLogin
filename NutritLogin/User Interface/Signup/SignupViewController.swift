@@ -19,14 +19,14 @@ class SignupViewController: UIViewController {
         return imageView
     }()
     
-    lazy var errorLabel: UILabel = {
-        let errorLabel = UILabel()
-        errorLabel.text = "The password should contain between 6 and 20 characters"
-        errorLabel.textColor = .white
-        errorLabel.adjustsFontSizeToFitWidth = true
-        errorLabel.numberOfLines = 2
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        return errorLabel
+    lazy var alertMessage: UILabel = {
+        let label = UILabel()
+        label.text = "The password should contain between 6 and 20 characters"
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     lazy var signUpTextField: UITextField = {
@@ -88,7 +88,7 @@ class SignupViewController: UIViewController {
         signUp.setTitleColor(.white, for: .normal)
         signUp.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
         signUp.layer.cornerRadius = 5
-        //signUp.addTarget(self, action: #selector(signUpDone), for: .touchUpInside)
+        signUp.addTarget(self, action: #selector(signUpDone), for: .touchUpInside)
         signUp.translatesAutoresizingMaskIntoConstraints = false
         return signUp
     }()
@@ -100,14 +100,14 @@ class SignupViewController: UIViewController {
         setupLayout()
     }
     
-    /*@objc func signUpDone() {
-        let registered = RegisteredViewController()
+    @objc func signUpDone() {
+        let registered = LoggedViewController()
         navigationController?.pushViewController(registered, animated: true)
-    }*/
+    }
     
     func setupLayout() {
         view.addSubview(logoimageView)
-        view.addSubview(errorLabel)
+        view.addSubview(alertMessage)
         view.addSubview(signUpTextField)
         view.addSubview(passwordTextField)
         view.addSubview(repeatPasswordTextField)
@@ -119,13 +119,13 @@ class SignupViewController: UIViewController {
         logoimageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         logoimageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
         
-        errorLabel.topAnchor.constraint(equalTo: logoimageView.bottomAnchor, constant: 20).isActive = true
-        errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        alertMessage.topAnchor.constraint(equalTo: logoimageView.bottomAnchor, constant: 20).isActive = true
+        alertMessage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        alertMessage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         
-        signUpTextField.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 10).isActive = true
-        signUpTextField.trailingAnchor.constraint(equalTo: errorLabel.trailingAnchor).isActive = true
-        signUpTextField.leadingAnchor.constraint(equalTo: errorLabel.leadingAnchor).isActive = true
+        signUpTextField.topAnchor.constraint(equalTo: alertMessage.bottomAnchor, constant: 10).isActive = true
+        signUpTextField.trailingAnchor.constraint(equalTo: alertMessage.trailingAnchor).isActive = true
+        signUpTextField.leadingAnchor.constraint(equalTo: alertMessage.leadingAnchor).isActive = true
         
         passwordTextField.topAnchor.constraint(equalTo: signUpTextField.bottomAnchor, constant: 10).isActive = true
         passwordTextField.trailingAnchor.constraint(equalTo: signUpTextField.trailingAnchor).isActive = true
