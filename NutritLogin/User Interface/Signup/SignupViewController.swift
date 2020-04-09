@@ -88,7 +88,7 @@ class SignupViewController: UIViewController {
         signUp.setTitleColor(.white, for: .normal)
         signUp.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
         signUp.layer.cornerRadius = 5
-        //signUp.addTarget(self, action: #selector(signUpDone), for: .touchUpInside)
+        signUp.addTarget(self, action: #selector(signUpDone), for: .touchUpInside)
         signUp.translatesAutoresizingMaskIntoConstraints = false
         return signUp
     }()
@@ -96,16 +96,53 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        errorLabel.isHidden = true
         view.backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
         setupLayout()
     }
     
-    /*@objc func signUpDone() {
-        let registered = RegisteredViewController()
-        navigationController?.pushViewController(registered, animated: true)
-    }*/
+    @objc func signUpDone() {
+        
+        guard let userEmail = signUpTextField.text, signUpTextField.text?.characters.count != 0 else {
+            
+            errorLabel.isHidden = false
+            errorLabel.textColor = .red
+            errorLabel.text = "Please enter an Email."
+            //displayMyAlertMessage(userMessage: "Please enter an Email.")
+            return
+        }
+        
+        if isValidEmail(emailID: userEmail) == false {
+            
+            errorLabel.isHidden = false
+            errorLabel.textColor = .red
+            errorLabel.text = "Please enter a valid Email."
+            //displayMyAlertMessage(userMessage: "Please enter a valid Email.")
+        }
+        
+        guard let userPassword = passwordTextField.text, (passwordTextField.text?.characters.count)! > 5 else {
+            
+            errorLabel.isHidden = false
+            errorLabel.textColor = .red
+            errorLabel.text = "Your password need minimmum 6 characters"
+            //displayMyAlertMessage(userMessage: "Your password need minimmum 6 characters")
+            return
+        }
+        
+        let repeatPassword = repeatPasswordTextField.text
+        
+        if repeatPassword != userPassword {
+            errorLabel.isHidden = false
+            errorLabel.textColor = .red
+            errorLabel.text = "Passwords do not match!"
+            //displayMyAlertMessage(userMessage: "Passwords do not match!")
+        } else {
+            
+            displayMyAlertMessage(userMessage: "Registration successful. Thank you!")
+        }
+    }
     
-    func setupLayout() {
+    private func setupLayout() {
         view.addSubview(logoimageView)
         view.addSubview(errorLabel)
         view.addSubview(signUpTextField)
@@ -142,6 +179,27 @@ class SignupViewController: UIViewController {
         signUpButton.topAnchor.constraint(equalTo: termsAndConditionsLabel.bottomAnchor, constant: 20).isActive = true
         signUpButton.leadingAnchor.constraint(equalTo: termsAndConditionsLabel.leadingAnchor).isActive = true
         signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        
+    }
+    
+    func isValidEmail(emailID:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: emailID)
+    }
+    
+    private func displayMyAlertMessage(userMessage: String) {
+        
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            let loginViewController = LoginViewController()
+            
+            self.navigationController?.pushViewController(loginViewController, animated: true)
+        })
+        
+        myAlert.addAction(okAction)
+        
+        self.present(myAlert, animated: true, completion: nil)
         
     }
 
