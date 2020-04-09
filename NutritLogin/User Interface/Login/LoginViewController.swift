@@ -81,22 +81,41 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        alertLabel.isHidden = true
         view.backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
         setupLayout()
     }
     
     @objc func logingNow() {
-        let loging = StartedSessionViewController()
-        navigationController?.pushViewController(loging, animated: true)
+        
+        
+        
+        let userEmail = loginTextField.text
+        let password = passwordTextField.text
+        
+        if userEmail?.isEmpty == true {
+            alertLabel.isHidden = false
+            alertLabel.textColor = .red
+            alertLabel.text = "Please enter an Email"
+        }
+        //MARK: textField del signupviewcontroller con userDefaults
+        let storedEmail = UserDefaults.standard.string(forKey: "userEmail")
+        let storedPassword = UserDefaults.standard.string(forKey: "userPassword")
+        
+        if (userEmail == storedEmail) && (password == storedPassword) {
+            UserDefaults.standard.synchronize()
+            let loging = StartedSessionViewController()
+            navigationController?.pushViewController(loging, animated: true)
+        } else {
+            displayAlertMessage(alertMessage: "The email or the password are incorrect, please check it")
+        }
     }
     
     @objc func signUpNow() {
-        let signUp = SignupViewController()
-        navigationController?.pushViewController(signUp, animated: true)
         
     }
     
+    //MARK: Functions
     @objc func forgotPassword() {
         let forgot = ForgotPasswordViewController()
         
@@ -145,4 +164,14 @@ class LoginViewController: UIViewController {
         
     }
     
+    func displayAlertMessage(alertMessage: String){
+        
+        let myAlert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        myAlert.addAction(okAction)
+        
+        self.present(myAlert, animated: true, completion: nil)
+        
+    }
 }
