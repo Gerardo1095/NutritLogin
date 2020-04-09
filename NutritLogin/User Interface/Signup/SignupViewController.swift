@@ -140,6 +140,10 @@ class SignupViewController: UIViewController {
             
             displayMyAlertMessage(userMessage: "Registration successful. Thank you!")
         }
+        
+        UserDefaults.standard.set(userEmail, forKey: "userEmail")
+        UserDefaults.standard.set(userPassword, forKey: "userPassword")
+        UserDefaults.standard.synchronize()
     }
     
     private func setupLayout() {
