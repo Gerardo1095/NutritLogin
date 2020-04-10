@@ -112,35 +112,27 @@ class SignupViewController: UIViewController {
             return
         }
         
-        if isValidEmail(emailID: userEmail) == false {
+        guard let userPassword = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6 else {
             
             errorLabel.isHidden = false
             errorLabel.textColor = .red
-            errorLabel.text = "Please enter a valid Email."
-            //displayMyAlertMessage(userMessage: "Please enter a valid Email.")
-        }
-        
-        guard let userPassword = passwordTextField.text, (passwordTextField.text?.characters.count)! > 5 else {
-            
-            errorLabel.isHidden = false
-            errorLabel.textColor = .red
-            errorLabel.text = "Your password need minimmum 6 characters"
-            //displayMyAlertMessage(userMessage: "Your password need minimmum 6 characters")
+            errorLabel.text = "The password should contain between 6 and 20 characters"
             return
         }
         
         let repeatPassword = repeatPasswordTextField.text
         
-        if repeatPassword != userPassword {
-            errorLabel.isHidden = false
-            errorLabel.textColor = .red
-            errorLabel.text = "Passwords do not match!"
-            //displayMyAlertMessage(userMessage: "Passwords do not match!")
+        if isValidEmail(emailID: userEmail) == true && (repeatPassword == userPassword) {
+            displayMyAlertMessage(userMessage: "Registration successful. Thank you!")
+            
         } else {
             
-            displayMyAlertMessage(userMessage: "Registration successful. Thank you!")
+            errorLabel.isHidden = false
+            errorLabel.textColor = .red
+            errorLabel.text = "Please enter a valid email or check your confirm password."
+            
         }
-        
+    
         UserDefaults.standard.set(userEmail, forKey: "userEmail")
         UserDefaults.standard.set(userPassword, forKey: "userPassword")
         UserDefaults.standard.synchronize()
