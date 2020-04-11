@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewController = SignupViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.barTintColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
+        //navigationController.setNavigationBarHidden(true, animated: true)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
