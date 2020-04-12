@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
         let passwordTextField = UITextField()
         passwordTextField.placeholder = "Password"
         passwordTextField.backgroundColor = .white
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.keyboardType = .emailAddress
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false

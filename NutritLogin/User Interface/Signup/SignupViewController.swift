@@ -44,6 +44,7 @@ class SignupViewController: UIViewController {
         let passwordTextField = UITextField()
         passwordTextField.placeholder = "Password"
         passwordTextField.backgroundColor = .white
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.keyboardType = .emailAddress
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -55,6 +56,7 @@ class SignupViewController: UIViewController {
         let passwordTextField = UITextField()
         passwordTextField.placeholder = "Repeat Password"
         passwordTextField.backgroundColor = .white
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.keyboardType = .emailAddress
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
