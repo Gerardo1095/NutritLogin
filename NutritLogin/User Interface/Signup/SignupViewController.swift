@@ -98,6 +98,10 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        signUpTextField.delegate = self
+        passwordTextField.delegate = self
+        repeatPasswordTextField.delegate = self
+    
         errorLabel.isHidden = true
         view.backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
         setupLayout()
@@ -200,5 +204,14 @@ class SignupViewController: UIViewController {
         self.present(myAlert, animated: true, completion: nil)
         
     }
+    
+}
 
+extension SignupViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }

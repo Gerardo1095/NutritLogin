@@ -82,6 +82,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
+        
         alertLabel.isHidden = true
         view.backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
         setupLayout()
@@ -176,5 +180,13 @@ class LoginViewController: UIViewController {
         
         self.present(myAlert, animated: true, completion: nil)
         
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
