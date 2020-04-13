@@ -74,15 +74,15 @@ class SignupViewController: UIViewController {
         return Label
     }()
     
-    /*lazy var termsAndConditionsButton: UIButton = {
+    lazy var termsAndConditionsButton: UIButton = {
      let button = UIButton()
-     button.setTitle("Terms of service", for: .normal)
-     button.setTitleColor(.white, for: .normal)
-     button.titleLabel?.font = UIFont(name: "", size: 5)
-     button.translatesAutoresizingMaskIntoConstraints = false
-     return button
-     }()
-     */
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 5
+        //button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+       return button
+    }()
     
     lazy var signUpButton: UIButton = {
         let signUp = UIButton()
@@ -107,6 +107,11 @@ class SignupViewController: UIViewController {
         setupLayout()
     }
     
+    @objc func buttonSelected() {
+        
+        termsAndConditionsButton.backgroundColor = .gray
+        print("acepto!")
+    }
     @objc func signUpDone() {
         
         guard let userEmail = signUpTextField.text, signUpTextField.text?.characters.count != 0 else {
@@ -150,6 +155,7 @@ class SignupViewController: UIViewController {
         view.addSubview(signUpTextField)
         view.addSubview(passwordTextField)
         view.addSubview(repeatPasswordTextField)
+        view.addSubview(termsAndConditionsButton)
         view.addSubview(termsAndConditionsLabel)
         view.addSubview(signUpButton)
         
@@ -174,8 +180,13 @@ class SignupViewController: UIViewController {
         repeatPasswordTextField.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor).isActive = true
         repeatPasswordTextField.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor).isActive = true
         
+        termsAndConditionsButton.centerYAnchor.constraint(equalTo: termsAndConditionsLabel.centerYAnchor).isActive = true
+        termsAndConditionsButton.leadingAnchor.constraint(equalTo: repeatPasswordTextField.leadingAnchor).isActive = true
+        termsAndConditionsButton.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        termsAndConditionsButton.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        
         termsAndConditionsLabel.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: 20).isActive = true
-        termsAndConditionsLabel.leadingAnchor.constraint(equalTo: repeatPasswordTextField.leadingAnchor).isActive = true
+        termsAndConditionsLabel.leadingAnchor.constraint(equalTo: termsAndConditionsButton.leadingAnchor, constant: 12).isActive = true
         termsAndConditionsLabel.trailingAnchor.constraint(equalTo: repeatPasswordTextField.trailingAnchor, constant: 10).isActive = true
         
         signUpButton.topAnchor.constraint(equalTo: termsAndConditionsLabel.bottomAnchor, constant: 20).isActive = true
