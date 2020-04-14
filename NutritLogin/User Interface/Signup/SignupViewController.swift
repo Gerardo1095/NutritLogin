@@ -79,7 +79,6 @@ class SignupViewController: UIViewController {
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
         //button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
        return button
     }()
@@ -112,13 +111,14 @@ class SignupViewController: UIViewController {
     }
     
     @objc func gestureRecognizer() {
+        termsAndConditionsButton.backgroundColor = .black
         print("Estoy presionando mi label")
     }
     
-    @objc func buttonSelected() {
-        
+    /*@objc func buttonSelected() {
         termsAndConditionsButton.backgroundColor = .gray
-    }
+    }*/
+    
     @objc func signUpDone() {
         
         guard let userEmail = signUpTextField.text, signUpTextField.text?.characters.count != 0 else {
