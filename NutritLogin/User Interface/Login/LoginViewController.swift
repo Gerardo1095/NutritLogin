@@ -105,12 +105,23 @@ class LoginViewController: UIViewController {
         let storedEmail = UserDefaults.standard.string(forKey: "userEmail")
         let storedPassword = UserDefaults.standard.string(forKey: "userPassword")
         
-        if (userEmail == storedEmail) && (password == storedPassword) {
+        if (userEmail == storedEmail) {
+            
+            if (password == storedPassword) {
             UserDefaults.standard.synchronize()
             let loging = StartedSessionViewController()
             navigationController?.pushViewController(loging, animated: true)
+                
+            } else {
+                alertLabel.isHidden = false
+                alertLabel.textColor = .red
+                alertLabel.text = "the password is incorrect"
+            }
+            
         } else {
-            displayAlertMessage(alertMessage: "The email or the password are incorrect, please check it")
+            alertLabel.isHidden = false
+            alertLabel.textColor = .red
+            alertLabel.text = "Invalid email"
         }
     }
     

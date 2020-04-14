@@ -140,14 +140,22 @@ class SignupViewController: UIViewController {
         
         let repeatPassword = repeatPasswordTextField.text
         
-        if isValidEmail(emailID: userEmail) == true && (repeatPassword == userPassword) {
-            displayMyAlertMessage(userMessage: "Registration successful. Thank you!")
+        if isValidEmail(emailID: userEmail) == true {
+            
+            if (repeatPassword == userPassword) {
+             displayMyAlertMessage(userMessage: "Registration successful. Thank you!")
+            } else {
+            
+                errorLabel.isHidden = false
+                errorLabel.textColor = .red
+                errorLabel.text = "The passwords do not match"
+            }
             
         } else {
             
             errorLabel.isHidden = false
             errorLabel.textColor = .red
-            errorLabel.text = "Please enter a valid email or check your confirm password."
+            errorLabel.text = "You need a valid email"
             
         }
     
