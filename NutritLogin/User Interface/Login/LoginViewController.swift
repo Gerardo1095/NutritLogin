@@ -93,8 +93,6 @@ class LoginViewController: UIViewController {
     
     @objc func logingNow() {
         
-        
-        
         let userEmail = loginTextField.text
         let password = passwordTextField.text
         
@@ -116,9 +114,10 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
-    
     @objc func signUpNow() {
+        let signUpController = SignupViewController()
+        
+        navigationController?.pushViewController(signUpController, animated: true)
         
     }
     

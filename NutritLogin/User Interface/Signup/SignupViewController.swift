@@ -98,6 +98,10 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizer))
+        termsAndConditionsLabel.isUserInteractionEnabled = true
+        termsAndConditionsLabel.addGestureRecognizer(tap)
+        
         signUpTextField.delegate = self
         passwordTextField.delegate = self
         repeatPasswordTextField.delegate = self
@@ -107,10 +111,13 @@ class SignupViewController: UIViewController {
         setupLayout()
     }
     
+    @objc func gestureRecognizer() {
+        print("Estoy presionando mi label")
+    }
+    
     @objc func buttonSelected() {
         
         termsAndConditionsButton.backgroundColor = .gray
-        print("acepto!")
     }
     @objc func signUpDone() {
         
