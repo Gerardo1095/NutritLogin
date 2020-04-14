@@ -89,6 +89,8 @@ class SignupViewController: UIViewController {
         signUp.setTitleColor(.white, for: .normal)
         signUp.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
         signUp.layer.cornerRadius = 5
+        signUp.isEnabled = false
+        signUp.alpha = 0.30
         signUp.addTarget(self, action: #selector(signUpDone), for: .touchUpInside)
         signUp.translatesAutoresizingMaskIntoConstraints = false
         return signUp
@@ -96,6 +98,8 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Sign up"
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizer))
         termsAndConditionsLabel.isUserInteractionEnabled = true
@@ -111,7 +115,10 @@ class SignupViewController: UIViewController {
     }
     
     @objc func gestureRecognizer() {
+        
         termsAndConditionsButton.backgroundColor = .black
+        signUpButton.isEnabled = true
+        signUpButton.alpha = 1.0
         print("Estoy presionando mi label")
     }
     
