@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
         let passwordTextField = UITextField()
         passwordTextField.placeholder = "Password"
         passwordTextField.backgroundColor = .white
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.keyboardType = .emailAddress
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -81,22 +82,59 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationItem.title = "Login"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        alertLabel.isHidden = true
         view.backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
         setupLayout()
     }
     
     @objc func logingNow() {
-        let loging = StartedSessionViewController()
-        navigationController?.pushViewController(loging, animated: true)
+        
+        let userEmail = loginTextField.text
+        let password = passwordTextField.text
+        
+        if userEmail?.isEmpty == true {
+            alertLabel.isHidden = false
+            alertLabel.textColor = .red
+            alertLabel.text = "Please enter an Email"
+        }
+        //MARK: textField del signupviewcontroller con userDefaults
+        let storedEmail = UserDefaults.standard.string(forKey: "userEmail")
+        let storedPassword = UserDefaults.standard.string(forKey: "userPassword")
+        
+        if (userEmail == storedEmail) {
+            
+            if (password == storedPassword) {
+            UserDefaults.standard.synchronize()
+            let loging = StartedSessionViewController()
+            navigationController?.pushViewController(loging, animated: true)
+                
+            } else {
+                alertLabel.isHidden = false
+                alertLabel.textColor = .red
+                alertLabel.text = "the password is incorrect"
+            }
+            
+        } else {
+            alertLabel.isHidden = false
+            alertLabel.textColor = .red
+            alertLabel.text = "Invalid email"
+        }
     }
     
     @objc func signUpNow() {
-        let signUp = SignupViewController()
-        navigationController?.pushViewController(signUp, animated: true)
+        let signUpController = SignupViewController()
+        
+        navigationController?.pushViewController(signUpController, animated: true)
         
     }
     
+    //MARK: Functions
     @objc func forgotPassword() {
         let forgot = ForgotPasswordViewController()
         
@@ -145,4 +183,22 @@ class LoginViewController: UIViewController {
         
     }
     
+    func displayAlertMessage(alertMessage: String){
+        
+        let myAlert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        myAlert.addAction(okAction)
+        
+        self.present(myAlert, animated: true, completion: nil)
+        
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
