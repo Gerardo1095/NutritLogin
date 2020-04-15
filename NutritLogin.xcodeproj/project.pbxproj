@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF04F7452446ACD900A0A96A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04F7442446ACD900A0A96A /* LoginView.swift */; };
 		AF7DFCE5243C166C00DFD370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFCE4243C166C00DFD370 /* AppDelegate.swift */; };
 		AF7DFCEA243C166C00DFD370 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7DFCE8243C166C00DFD370 /* Main.storyboard */; };
 		AF7DFCEC243C167000DFD370 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7DFCEB243C167000DFD370 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF04F7442446ACD900A0A96A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AF7DFCE1243C166C00DFD370 /* NutritLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutritLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7DFCE4243C166C00DFD370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF7DFCE9243C166C00DFD370 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -30,8 +32,8 @@
 		AF7DFCFE243C187900DFD370 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		AF7DFD00243C18AB00DFD370 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		AF7DFD02243C239600DFD370 /* StartedSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedSessionViewController.swift; sourceTree = "<group>"; };
-		AF7DFD0A243C4A7500DFD370 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		AF7DFD06243C484E00DFD370 /* LoggedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedViewController.swift; sourceTree = "<group>"; };
+		AF7DFD0A243C4A7500DFD370 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				AF7DFCFC243C186900DFD370 /* LoginViewController.swift */,
+				AF04F7442446ACD900A0A96A /* LoginView.swift */,
 				AF7DFD02243C239600DFD370 /* StartedSessionViewController.swift */,
 			);
 			path = Login;
@@ -188,6 +191,7 @@
 				AF7DFCFD243C186900DFD370 /* LoginViewController.swift in Sources */,
 				AF7DFD0B243C4A7500DFD370 /* MessageView.swift in Sources */,
 				AF7DFD03243C239600DFD370 /* StartedSessionViewController.swift in Sources */,
+				AF04F7452446ACD900A0A96A /* LoginView.swift in Sources */,
 				AF7DFCE5243C166C00DFD370 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,197 +8,95 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
-    //Lets Objects to create the UI
-    lazy var logoimageView: UIImageView = {
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo-nutrit")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return imageView
-    }()
+final class LoginViewController: UIViewController {
     
-    lazy var alertLabel: UILabel = {
-        let errorLabel = UILabel()
-        errorLabel.text = "The email is required"
-        errorLabel.textColor = .red
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        return errorLabel
-    }()
+    //MARK: Variables and Constants
+    private let loginView = LoginView()
     
-    lazy var loginTextField: UITextField = {
-        let logingTextField = UITextField()
-        logingTextField.placeholder = "Usuario"
-        logingTextField.backgroundColor = .white
-        logingTextField.keyboardType = .emailAddress
-        logingTextField.borderStyle = .roundedRect
-        logingTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return logingTextField
-    }()
-    
-    lazy var passwordTextField: UITextField = {
-        let passwordTextField = UITextField()
-        passwordTextField.placeholder = "Password"
-        passwordTextField.backgroundColor = .white
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.keyboardType = .emailAddress
-        passwordTextField.borderStyle = .roundedRect
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return passwordTextField
-    }()
-    
-    lazy var loginButton: UIButton = {
-        let loginButton = UIButton()
-        loginButton.setTitle("Loging", for: .normal)
-        loginButton.setTitleColor(.white, for: .normal)
-        loginButton.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
-        loginButton.layer.cornerRadius = 5
-        loginButton.addTarget(self, action: #selector(logingNow), for: .touchUpInside)
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        return loginButton
-    }()
-    
-    lazy var signUpButton: UIButton = {
-        let signUp = UIButton()
-        signUp.setTitle("Sign Up!", for: .normal)
-        signUp.setTitleColor(.white, for: .normal)
-        signUp.translatesAutoresizingMaskIntoConstraints = false
-        signUp.addTarget(self, action: #selector(signUpNow), for: .touchUpInside)
-        return signUp
-    }()
-    
-    lazy var forgotButton: UIButton = {
-        let forgot = UIButton()
-        forgot.setTitle("Forgot Password?", for: .normal)
-        forgot.setTitleColor(.white, for: .normal)
-        forgot.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
-        forgot.translatesAutoresizingMaskIntoConstraints = false
-        return forgot
-    }()
-    
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Login"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        loginTextField.delegate = self
-        passwordTextField.delegate = self
-        
-        alertLabel.isHidden = true
-        view.backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
-        setupLayout()
-    }
-    
-    @objc func logingNow() {
-        
-        let userEmail = loginTextField.text
-        let password = passwordTextField.text
-        
-        if userEmail?.isEmpty == true {
-            alertLabel.isHidden = false
-            alertLabel.textColor = .red
-            alertLabel.text = "Please enter an Email"
-        }
-        //MARK: textField del signupviewcontroller con userDefaults
-        let storedEmail = UserDefaults.standard.string(forKey: "userEmail")
-        let storedPassword = UserDefaults.standard.string(forKey: "userPassword")
-        
-        if (userEmail == storedEmail) {
-            
-            if (password == storedPassword) {
-            UserDefaults.standard.synchronize()
-            let loging = StartedSessionViewController()
-            navigationController?.pushViewController(loging, animated: true)
-                
-            } else {
-                alertLabel.isHidden = false
-                alertLabel.textColor = .red
-                alertLabel.text = "the password is incorrect"
-            }
-            
-        } else {
-            alertLabel.isHidden = false
-            alertLabel.textColor = .red
-            alertLabel.text = "Invalid email"
-        }
-    }
-    
-    @objc func signUpNow() {
-        let signUpController = SignupViewController()
-        
-        navigationController?.pushViewController(signUpController, animated: true)
-        
+        setUpNavigationItem()
+        setUpView()
     }
     
     //MARK: Functions
-    @objc func forgotPassword() {
-        let forgot = ForgotPasswordViewController()
-        
-        navigationController?.pushViewController(forgot, animated: true)
-        
+    private func setUpNavigationItem() {
+        navigationItem.title = "Login"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
     
-    func setupLayout() {
-        view.addSubview(logoimageView)
-        view.addSubview(alertLabel)
-        view.addSubview(loginTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(loginButton)
-        view.addSubview(signUpButton)
-        view.addSubview(forgotButton)
+    private func setUpView() {
+        loginView.delegate = self
         
-        logoimageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
-        logoimageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        //logoimageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        logoimageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
-        logoimageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
+        loginView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loginView)
         
-        alertLabel.topAnchor.constraint(equalTo: logoimageView.bottomAnchor, constant: 50).isActive = true
-        alertLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        alertLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        alertLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        
-        loginTextField.topAnchor.constraint(equalTo: alertLabel.bottomAnchor, constant: 10).isActive = true
-        loginTextField.leadingAnchor.constraint(equalTo: alertLabel.leadingAnchor).isActive = true
-        loginTextField.trailingAnchor.constraint(equalTo: alertLabel.trailingAnchor).isActive = true
-        
-        passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 10).isActive = true
-        passwordTextField.leadingAnchor.constraint(equalTo: loginTextField.leadingAnchor).isActive = true
-        passwordTextField.trailingAnchor.constraint(equalTo: loginTextField.trailingAnchor).isActive = true
-        
-        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
-        loginButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor).isActive = true
-        loginButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 40)
-        
-        signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 7).isActive = true
-        signUpButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor).isActive = true
-        
-        forgotButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 7).isActive = true
-        forgotButton.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor).isActive = true
-        
+        NSLayoutConstraint.activate([
+            loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loginView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            loginView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            loginView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ])
     }
     
-    func displayAlertMessage(alertMessage: String){
+    private func validateInput(userName: String?, password: String?) -> Bool {
+        if userName == "" {
+            loginView.displayErrorMessage("Please enter an Email")
+            return false
+        }else if isValidEmail(userName!) {
+            loginView.displayErrorMessage("Invalid email")
+            return false
+        } else if password == "" {
+            loginView.displayErrorMessage("Please enter a password")
+            return false
+        }
         
-        let myAlert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        return true
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
+    
+    private func validateUserExistance(userName: String?, password: String?) -> Bool {
+        guard let user = userName, let password = password else { return false }
+        let storedEmail = UserDefaults.standard.string(forKey: "userEmail")
+        let storedPassword = UserDefaults.standard.string(forKey: "userPassword")
         
-        myAlert.addAction(okAction)
+        if user != storedEmail && password != storedPassword {
+            loginView.displayErrorMessage("Invalid user or password")
+            return false
+        }
+        return true
+    }
+    
+    private func moveToHome() {
+        let welcometoNutritViewController = StartedSessionViewController()
         
-        self.present(myAlert, animated: true, completion: nil)
-        
+        navigationController?.pushViewController(welcometoNutritViewController, animated: true)
     }
 }
 
-extension LoginViewController: UITextFieldDelegate {
+//MARK: LoginViewDelegate
+extension LoginViewController: LoginViewDelegate {
+    func loginView(_ loginView: LoginView, loginPressed loginButton: UIButton, userName: String?, password: String?) {
+        guard validateInput(userName: userName, password: password) else { return }
+        guard validateUserExistance(userName: userName, password: password) else { return }
+        
+        moveToHome()
+        
+    }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    func loginView(_ loginView: LoginView, signUpPressed signUpButton: UIButton) {
+        let signUpController = SignupViewController()
+        navigationController?.pushViewController(signUpController, animated: true)
+    }
+    
+    func loginView(_ loginView: LoginView, forgotPasswordPressed forgotPasswordButton: UIButton) {
+        let forgot = ForgotPasswordViewController()
+        navigationController?.pushViewController(forgot, animated: true)
     }
 }
