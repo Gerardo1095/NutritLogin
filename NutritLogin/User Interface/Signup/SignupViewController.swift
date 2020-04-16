@@ -8,243 +8,93 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
-
-    lazy var logoimageView: UIImageView = {
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo-nutrit")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return imageView
-    }()
+final class SignupViewController: UIViewController {
     
-    lazy var errorLabel: UILabel = {
-        let label = UILabel()
-        label.text = "The password should contain between 6 and 20 characters"
-        label.textColor = .white
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 2
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    //MARK: Variables and Constants
+    private let signUpView = SignUpView()
     
-    lazy var signUpTextField: UITextField = {
-        let signUpTextField = UITextField()
-        signUpTextField.placeholder = "Email"
-        signUpTextField.backgroundColor = .white
-        signUpTextField.keyboardType = .emailAddress
-        signUpTextField.borderStyle = .roundedRect
-        signUpTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return signUpTextField
-    }()
-    
-    lazy var passwordTextField: UITextField = {
-        let passwordTextField = UITextField()
-        passwordTextField.placeholder = "Password"
-        passwordTextField.backgroundColor = .white
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.keyboardType = .emailAddress
-        passwordTextField.borderStyle = .roundedRect
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return passwordTextField
-    }()
-    
-    lazy var repeatPasswordTextField: UITextField = {
-        let passwordTextField = UITextField()
-        passwordTextField.placeholder = "Repeat Password"
-        passwordTextField.backgroundColor = .white
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.keyboardType = .emailAddress
-        passwordTextField.borderStyle = .roundedRect
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return passwordTextField
-    }()
-    
-    lazy var termsAndConditionsLabel: UILabel = {
-        let Label = UILabel()
-        Label.text = "I have read and agree the terms of service"
-        Label.textColor = .white
-        Label.font = UIFont(name: Label.font.fontName, size: 15)
-        Label.numberOfLines = 2
-        Label.translatesAutoresizingMaskIntoConstraints = false
-        return Label
-    }()
-    
-    lazy var termsAndConditionsButton: UIButton = {
-     let button = UIButton()
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 5
-        //button.layer.borderWidth = 1
-        button.translatesAutoresizingMaskIntoConstraints = false
-       return button
-    }()
-    
-    lazy var signUpButton: UIButton = {
-        let signUp = UIButton()
-        signUp.setTitle("Sign Up", for: .normal)
-        signUp.setTitleColor(.white, for: .normal)
-        signUp.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
-        signUp.layer.cornerRadius = 5
-        signUp.isEnabled = false
-        signUp.alpha = 0.30
-        signUp.addTarget(self, action: #selector(signUpDone), for: .touchUpInside)
-        signUp.translatesAutoresizingMaskIntoConstraints = false
-        return signUp
-    }()
-    
+    //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpNavigationItem()
+        setUpView()
+    }
+    
+    //MARK: Functions
+    private func setUpNavigationItem() {
         navigationItem.title = "Sign up"
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizer))
-        termsAndConditionsLabel.isUserInteractionEnabled = true
-        termsAndConditionsLabel.addGestureRecognizer(tap)
-        
-        signUpTextField.delegate = self
-        passwordTextField.delegate = self
-        repeatPasswordTextField.delegate = self
-    
-        errorLabel.isHidden = true
-        view.backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
-        setupLayout()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
     
-    @objc func gestureRecognizer() {
+    private func setUpView() {
+        signUpView.delegate = self
+        signUpView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(signUpView)
         
-        termsAndConditionsButton.backgroundColor = .black
-        signUpButton.isEnabled = true
-        signUpButton.alpha = 1.0
-        print("Estoy presionando mi label")
+        NSLayoutConstraint.activate([
+            signUpView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            signUpView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            signUpView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            signUpView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ])
     }
     
-    /*@objc func buttonSelected() {
-        termsAndConditionsButton.backgroundColor = .gray
-    }*/
-    
-    @objc func signUpDone() {
-        
-        guard let userEmail = signUpTextField.text, signUpTextField.text?.characters.count != 0 else {
-            
-            errorLabel.isHidden = false
-            errorLabel.textColor = .red
-            errorLabel.text = "Please enter an Email."
-            //displayMyAlertMessage(userMessage: "Please enter an Email.")
-            return
-        }
-        
-        guard let userPassword = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6 else {
-            
-            errorLabel.isHidden = false
-            errorLabel.textColor = .red
-            errorLabel.text = "The password should contain between 6 and 20 characters"
-            return
-        }
-        
-        let repeatPassword = repeatPasswordTextField.text
-        
-        if isValidEmail(emailID: userEmail) == true {
-            
-            if (repeatPassword == userPassword) {
-             displayMyAlertMessage(userMessage: "Registration successful. Thank you!")
-            } else {
-            
-                errorLabel.isHidden = false
-                errorLabel.textColor = .red
-                errorLabel.text = "The passwords do not match"
-            }
-            
-        } else {
-            
-            errorLabel.isHidden = false
-            errorLabel.textColor = .red
-            errorLabel.text = "You need a valid email"
-            
-        }
-    
-        UserDefaults.standard.set(userEmail, forKey: "userEmail")
-        UserDefaults.standard.set(userPassword, forKey: "userPassword")
-        UserDefaults.standard.synchronize()
-    }
-    
-    private func setupLayout() {
-        view.addSubview(logoimageView)
-        view.addSubview(errorLabel)
-        view.addSubview(signUpTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(repeatPasswordTextField)
-        view.addSubview(termsAndConditionsButton)
-        view.addSubview(termsAndConditionsLabel)
-        view.addSubview(signUpButton)
-        
-        logoimageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        logoimageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        logoimageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
-        logoimageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
-        
-        errorLabel.topAnchor.constraint(equalTo: logoimageView.bottomAnchor, constant: 20).isActive = true
-        errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        
-        signUpTextField.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 10).isActive = true
-        signUpTextField.trailingAnchor.constraint(equalTo: errorLabel.trailingAnchor).isActive = true
-        signUpTextField.leadingAnchor.constraint(equalTo: errorLabel.leadingAnchor).isActive = true
-        
-        passwordTextField.topAnchor.constraint(equalTo: signUpTextField.bottomAnchor, constant: 10).isActive = true
-        passwordTextField.trailingAnchor.constraint(equalTo: signUpTextField.trailingAnchor).isActive = true
-        passwordTextField.leadingAnchor.constraint(equalTo: signUpTextField.leadingAnchor).isActive = true
-        
-        repeatPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10).isActive = true
-        repeatPasswordTextField.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor).isActive = true
-        repeatPasswordTextField.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor).isActive = true
-        
-        termsAndConditionsButton.centerYAnchor.constraint(equalTo: termsAndConditionsLabel.centerYAnchor).isActive = true
-        termsAndConditionsButton.leadingAnchor.constraint(equalTo: repeatPasswordTextField.leadingAnchor).isActive = true
-        termsAndConditionsButton.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        termsAndConditionsButton.widthAnchor.constraint(equalToConstant: 10).isActive = true
-        
-        termsAndConditionsLabel.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: 20).isActive = true
-        termsAndConditionsLabel.leadingAnchor.constraint(equalTo: termsAndConditionsButton.leadingAnchor, constant: 12).isActive = true
-        termsAndConditionsLabel.trailingAnchor.constraint(equalTo: repeatPasswordTextField.trailingAnchor, constant: 10).isActive = true
-        
-        signUpButton.topAnchor.constraint(equalTo: termsAndConditionsLabel.bottomAnchor, constant: 20).isActive = true
-        signUpButton.leadingAnchor.constraint(equalTo: termsAndConditionsLabel.leadingAnchor).isActive = true
-        signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        
-    }
-    
-    func isValidEmail(emailID:String) -> Bool {
+    func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: emailID)
+        return emailTest.evaluate(with: email)
     }
     
-    private func displayMyAlertMessage(userMessage: String) {
+    private func validateInputs(userName: String?, password: String?, repeatPassword: String?) -> Bool {
+        if userName == "" {
+            signUpView.displayErrorMessage("Please enter an Email")
+            return false
+        } else if isValidEmail(userName!) {
+            signUpView.displayErrorMessage("Invalid email")
+            return false
+        } else if password == "" {
+            signUpView.displayErrorMessage("Please enter a password")
+            return false
+        } else if repeatPassword == "" {
+            signUpView.displayErrorMessage("You need to verify your password")
+            return false
+        } else if password != repeatPassword {
+            signUpView.displayErrorMessage("Passwords do not match")
+            return false
+        }
         
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
-            let loginViewController = LoginViewController()
-            
-            self.navigationController?.popViewController(animated: true)
-        })
         
-        myAlert.addAction(okAction)
-        
-        self.present(myAlert, animated: true, completion: nil)
-        
-    }
-    
-}
-
-extension SignupViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
         return true
     }
+    
+    private func savingUser(user: String?, with password: String?) -> Bool {
+        
+        UserDefaults.standard.set(user, forKey: "userEmail")
+        UserDefaults.standard.set(password, forKey: "userPassword")
+        UserDefaults.standard.synchronize()
+        
+        return true
+    }
+    private func registerSucessFul() {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK: SignUpViewDelegate
+extension SignupViewController: SignUpViewDelegate {
+    func signUpView(_ view: SignUpView, signUpPressed button: UIButton, user: String?, password: String?, repeatedPassword: String?) {
+        if validateInputs(userName: user, password: password, repeatPassword: repeatedPassword) {
+            guard savingUser(user: user, with: password) else {return}
+            registerSucessFul()
+        }
+    }
+    
+    func signUpView(_ view: SignUpView, termsAndConditionsPressed button: UIButton) {
+    }
+    
+    func signUpView(_ view: SignUpView, termsAndConditionsTapped label: UILabel) {
+    }
+    
     
 }
