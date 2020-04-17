@@ -44,7 +44,7 @@ final class LoginViewController: UIViewController {
         if userName == "" {
             loginView.displayErrorMessage("Please enter an Email")
             return false
-        }else if isValidEmail(userName!) {
+        }else if !isValidEmail(userName!) {
             loginView.displayErrorMessage("Invalid email")
             return false
         } else if password == "" {

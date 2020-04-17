@@ -18,7 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewController = LoginViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.barTintColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
-        
+        navigationController.navigationBar.tintColor = .white
+        navigationController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //navigationController.setNavigationBarHidden(true, animated: true)
         
         window = UIWindow(frame: UIScreen.main.bounds)

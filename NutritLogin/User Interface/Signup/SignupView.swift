@@ -19,7 +19,7 @@ final class SignUpView: UIView {
     //MARK: Variables and Constants
     weak var delegate: SignUpViewDelegate?
     
-    lazy var logoimageView: UIImageView = {
+    private lazy var logoimageView: UIImageView = {
         
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo-nutrit")
@@ -28,7 +28,7 @@ final class SignUpView: UIView {
         return imageView
     }()
     
-    lazy var alertLabel: UILabel = {
+    private lazy var alertLabel: UILabel = {
         let label = UILabel()
         label.text = "The password should contain between 6 and 20 characters"
         label.textColor = .white
@@ -38,7 +38,7 @@ final class SignUpView: UIView {
         return label
     }()
     
-    lazy var signUpTextField: UITextField = {
+    private lazy var signUpTextField: UITextField = {
         let signUpTextField = UITextField()
         signUpTextField.placeholder = "Email"
         signUpTextField.backgroundColor = .white
@@ -50,7 +50,7 @@ final class SignUpView: UIView {
         return signUpTextField
     }()
     
-    lazy var passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.placeholder = "Password"
         passwordTextField.backgroundColor = .white
@@ -63,7 +63,7 @@ final class SignUpView: UIView {
         return passwordTextField
     }()
     
-    lazy var repeatPasswordTextField: UITextField = {
+    private lazy var repeatPasswordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.placeholder = "Repeat Password"
         passwordTextField.backgroundColor = .white
@@ -76,35 +76,34 @@ final class SignUpView: UIView {
         return passwordTextField
     }()
     
-    lazy var termsAndConditionsLabel: UILabel = {
-        let Label = UILabel()
-        Label.text = "I have read and agree the terms of service"
-        Label.textColor = .white
-        Label.font = UIFont(name: Label.font.fontName, size: 15)
-        Label.numberOfLines = 2
-        Label.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(gestureRecognizerLabelTapped)))
-        Label.translatesAutoresizingMaskIntoConstraints = false
-        return Label
+    private lazy var termsAndConditionsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "I have read and agree the terms of service"
+        label.textColor = .white
+        label.font = UIFont(name: label.font.fontName, size: 15)
+        label.numberOfLines = 2
+        let tap = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizerButtonPressed))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    lazy var termsAndConditionsButton: UIButton = {
+    private lazy var termsAndConditionsButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
-        button.layer.cornerRadius = 2
-        button.layer.borderWidth = 5
-        //button.addTarget(self, action: #selector(termsAndConditionsButtonPressed), for: .touchUpInside)
+        button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let signUp = UIButton()
         signUp.setTitle("Sign Up", for: .normal)
         signUp.setTitleColor(.white, for: .normal)
         signUp.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
-        signUp.layer.cornerRadius = 5
-        signUp.isEnabled = true
-        //signUp.alpha = 0.30
+        signUp.isEnabled = false
+        signUp.alpha = 0.30
         signUp.addTarget(self, action: #selector(signUpButtonPressed), for: .touchUpInside)
         signUp.translatesAutoresizingMaskIntoConstraints = false
         return signUp
@@ -183,85 +182,22 @@ final class SignUpView: UIView {
         alertLabel.text = message
     }
     
-    /*private func displayMyAlertMessage(userMessage: String) {
-        
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
-            let loginViewController = LoginViewController()
-            
-            self.navigationController?.popViewController(animated: true)
-        })
-        
-        myAlert.addAction(okAction)
-        
-        self.present(myAlert, animated: true, completion: nil)
-        
-    }*/
-    
     //MARK: Actions
-    @objc func gestureRecognizerButtonPressed() {
-        
+    @objc private func gestureRecognizerButtonPressed() {
         termsAndConditionsButton.backgroundColor = .black
         signUpButton.isEnabled = true
         signUpButton.alpha = 1.0
-        print("Estoy presionando mi label")
     }
     
-    @objc func gestureRecognizerLabelTapped() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizerButtonPressed))
-        termsAndConditionsLabel.isUserInteractionEnabled = true
-        termsAndConditionsLabel.addGestureRecognizer(tap)
-    }
-    
-    /*@objc func signUpButtonPressed() {
-        
-        guard let userEmail = signUpTextField.text, signUpTextField.text?.characters.count != 0 else {
-            
-            alertLabel.textColor = .red
-            alertLabel.text = "Please enter an Email."
-            //displayMyAlertMessage(userMessage: "Please enter an Email.")
-            return
-        }
-        
-        guard let userPassword = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6 else {
-            
-            
-            alertLabel.textColor = .red
-            alertLabel.text = "The password should contain between 6 and 20 characters"
-            return
-        }
-        
-        let repeatPassword = repeatPasswordTextField.text
-        
-        if isValidEmail(emailID: userEmail) == true {
-            
-            if (repeatPassword == userPassword) {
-            } else {
-                alertLabel.textColor = .red
-                alertLabel.text = "The passwords do not match"
-            }
-            
-        } else {
-            alertLabel.textColor = .red
-            alertLabel.text = "You need a valid email"
-            
-        }
-        
-        UserDefaults.standard.set(userEmail, forKey: "userEmail")
-        UserDefaults.standard.set(userPassword, forKey: "userPassword")
-        UserDefaults.standard.synchronize()
-    }*/
-    
-    @objc func signUpButtonPressed() {
+    @objc private func signUpButtonPressed() {
         delegate?.signUpView(self, signUpPressed: signUpButton, user: signUpTextField.text, password: passwordTextField.text, repeatedPassword: repeatPasswordTextField.text)
-        print("estoy funcionando")
     }
     
-    @objc func termsAndConditionsButtonPressed() {
+    @objc private func termsAndConditionsButtonPressed() {
         delegate?.signUpView(self, termsAndConditionsPressed: termsAndConditionsButton)
     }
     
-    @objc func termsAndConditionsLabelTapped() {
+    @objc private func termsAndConditionsLabelTapped() {
         delegate?.signUpView(self, termsAndConditionsTapped: termsAndConditionsLabel)
     }
     
