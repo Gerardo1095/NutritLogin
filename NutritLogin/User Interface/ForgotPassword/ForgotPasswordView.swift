@@ -8,23 +8,107 @@
 
 import UIKit
 
-class ForgotPasswordView: UIViewController {
+protocol ForgotPasswordDelegate: AnyObject {
+    func forgotPasswordView(_ forgotPasswordView: ForgotPasswordView, sendEmailPressed sendEmailButton: UIButton, userEmail: String?)
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+class ForgotPasswordView: UIView {
+    //MARK: Variables and Constants
+    weak var delegate: ForgotPasswordDelegate?
+    
+    lazy var logoimageView: UIImageView = {
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "password-recovery")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return imageView
+    }()
+    
+    lazy var alertMessage: UILabel = {
+        let message = UILabel()
+        message.text = ""
+        message.textColor = .red
+        message.textAlignment = .center
+        message.numberOfLines = 2
+        message.translatesAutoresizingMaskIntoConstraints = false
+        return message
+    }()
+    
+    lazy var sendEmailTextField: UITextField = {
+        let email = UITextField()
+        email.placeholder = "Email"
+        email.backgroundColor = .white
+        email.keyboardType = .emailAddress
+        email.borderStyle = .roundedRect
+        email.delegate = self
+        email.translatesAutoresizingMaskIntoConstraints = false
+        
+        return email
+    }()
+    
+    lazy var sendEmailButton: UIButton = {
+        let sendEmail = UIButton()
+        sendEmail.setTitle("SEND EMAIL", for: .normal)
+        sendEmail.setTitleColor(.white, for: .normal)
+        sendEmail.backgroundColor = #colorLiteral(red: 0.1105268672, green: 0.4639024138, blue: 0.8267809749, alpha: 1)
+        sendEmail.layer.cornerRadius = 5
+        sendEmail.addTarget(self, action: #selector(sendEmailButtonPressed), for: .touchUpInside)
+        sendEmail.translatesAutoresizingMaskIntoConstraints = false
+        return sendEmail
+    }()
+    
+    //MARK: Life Cycle
+    
+    init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        setupLayout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-    */
-
+    //MARK: Functions
+    func displayErrorMessage(_ message: String) {
+        alertMessage.text = message
+    }
+    func setupLayout() {
+        backgroundColor = #colorLiteral(red: 0.4040249884, green: 0.7187735438, blue: 0.9633027911, alpha: 1)
+        addSubview(logoimageView)
+        addSubview(alertMessage)
+        addSubview(sendEmailTextField)
+        addSubview(sendEmailButton)
+        
+        logoimageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        logoimageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        logoimageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        logoimageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
+        
+        alertMessage.topAnchor.constraint(equalTo: logoimageView.bottomAnchor, constant: 20).isActive = true
+        alertMessage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        alertMessage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+    
+        sendEmailTextField.topAnchor.constraint(equalTo: alertMessage.bottomAnchor, constant: 10).isActive = true
+        sendEmailTextField.leadingAnchor.constraint(equalTo: alertMessage.leadingAnchor).isActive = true
+        sendEmailTextField.trailingAnchor.constraint(equalTo: alertMessage.trailingAnchor).isActive = true
+        
+        sendEmailButton.topAnchor.constraint(equalTo: sendEmailTextField.bottomAnchor, constant: 20).isActive = true
+        sendEmailButton.leadingAnchor.constraint(equalTo: sendEmailTextField.leadingAnchor).isActive = true
+        sendEmailButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+    }
+    
+    //MARK: Actions
+    @objc private func sendEmailButtonPressed() {
+        let userEmail = sendEmailTextField.text
+        delegate?.forgotPasswordView(self, sendEmailPressed: sendEmailButton, userEmail: userEmail)
+    }
 }
+
+//MARK: UITextFieldDelegate
+extension ForgotPasswordView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
