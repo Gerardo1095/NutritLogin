@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageView: UIViewController {
+class ForgotPasswordView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
