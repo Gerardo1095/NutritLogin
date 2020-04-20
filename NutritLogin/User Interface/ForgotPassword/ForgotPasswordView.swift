@@ -16,6 +16,8 @@ class ForgotPasswordView: UIView {
     //MARK: Variables and Constants
     weak var delegate: ForgotPasswordDelegate?
     
+    private weak var activeTextField: UITextField?
+    
     lazy var logoimageView: UIImageView = {
         
         let imageView = UIImageView()
@@ -97,6 +99,16 @@ class ForgotPasswordView: UIView {
         sendEmailButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     }
     
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.frame = frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
     //MARK: Actions
     @objc private func sendEmailButtonPressed() {
         let userEmail = sendEmailTextField.text
@@ -109,6 +121,14 @@ extension ForgotPasswordView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -5, up: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -5, up: false)
     }
 }
 
