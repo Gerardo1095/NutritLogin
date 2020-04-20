@@ -150,6 +150,16 @@ final class LoginView: UIView {
         alertLabel.text = message
     }
     
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.frame = frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
     //MARK: Actions
     
     @objc private func loginButtonPressed() {
@@ -173,5 +183,13 @@ extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -15, up: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -15, up: false)
     }
 }
