@@ -19,6 +19,7 @@ final class LoginView: UIView {
     //MARK: Constans and Variables
     
     weak var delegate: LoginViewDelegate?
+    let networkingService = NetworkingService()
     
     private let logoimageView: UIImageView = {
         let imageView = UIImageView()
@@ -166,6 +167,10 @@ final class LoginView: UIView {
         let userEmail = loginTextField.text
         let password = passwordTextField.text
         
+        let parameter = ["username":userEmail, "password":password]
+        networkingService.request(endPoint: "/api/v1/login", parameters: parameter as [String : Any]) { (result) in
+            print(result)
+            }
         delegate?.loginView(self, loginPressed: loginButton, userName: userEmail, password: password)
     }
     

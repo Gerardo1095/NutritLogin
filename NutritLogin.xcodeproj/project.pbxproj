@@ -27,6 +27,8 @@
 		AF7DFD03243C239600DFD370 /* StartedSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFD02243C239600DFD370 /* StartedSessionViewController.swift */; };
 		AF7DFD07243C484E00DFD370 /* LoggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFD06243C484E00DFD370 /* LoggedViewController.swift */; };
 		AF7DFD0B243C4A7500DFD370 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DFD0A243C4A7500DFD370 /* ForgotPasswordView.swift */; };
+		AFB69A7E2454D08400DEDD07 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB69A7D2454D08400DEDD07 /* NetworkingService.swift */; };
+		AFB69A822454D0BB00DEDD07 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB69A812454D0BB00DEDD07 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		AF7DFD02243C239600DFD370 /* StartedSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedSessionViewController.swift; sourceTree = "<group>"; };
 		AF7DFD06243C484E00DFD370 /* LoggedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedViewController.swift; sourceTree = "<group>"; };
 		AF7DFD0A243C4A7500DFD370 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		AFB69A7D2454D08400DEDD07 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		AFB69A812454D0BB00DEDD07 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 		AF7DFCE3243C166C00DFD370 /* NutritLogin */ = {
 			isa = PBXGroup;
 			children = (
+				AFB69A7C2454D01700DEDD07 /* Networking */,
 				AF4C3F6324513710003A4C9C /* NetworkLayer */,
 				AF7DFCFB243C17DF00DFD370 /* User Interface */,
 				AF7DFCE4243C166C00DFD370 /* AppDelegate.swift */,
@@ -171,6 +176,15 @@
 				AF7DFCFA243C17C800DFD370 /* ForgotPassword */,
 			);
 			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		AFB69A7C2454D01700DEDD07 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AFB69A7D2454D08400DEDD07 /* NetworkingService.swift */,
+				AFB69A812454D0BB00DEDD07 /* User.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +261,7 @@
 				AF4C3F6B24513A14003A4C9C /* HTTPTask.swift in Sources */,
 				AF04F7472447F2D300A0A96A /* SignupView.swift in Sources */,
 				AF7DFD01243C18AB00DFD370 /* ForgotPasswordViewController.swift in Sources */,
+				AFB69A7E2454D08400DEDD07 /* NetworkingService.swift in Sources */,
 				AF7DFCFF243C187900DFD370 /* SignupViewController.swift in Sources */,
 				AF4C3F71245140A9003A4C9C /* URLParameterEncoder.swift in Sources */,
 				AF4C3F7324514745003A4C9C /* JSONParameterEncoder.swift in Sources */,
@@ -261,6 +276,7 @@
 				AF04F7452446ACD900A0A96A /* LoginView.swift in Sources */,
 				AF4C3F67245137AA003A4C9C /* EndPointType.swift in Sources */,
 				AF7DFCE5243C166C00DFD370 /* AppDelegate.swift in Sources */,
+				AFB69A822454D0BB00DEDD07 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
