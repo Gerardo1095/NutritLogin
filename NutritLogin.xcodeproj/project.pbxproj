@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F0AF8DE63C46DA6582D97AD /* Pods_NutritLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027435D737B5BF9CAA37E79 /* Pods_NutritLogin.framework */; };
 		AF04F7452446ACD900A0A96A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04F7442446ACD900A0A96A /* LoginView.swift */; };
 		AF04F7472447F2D300A0A96A /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF04F7462447F2D300A0A96A /* SignupView.swift */; };
 		AF4C3F67245137AA003A4C9C /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C3F66245137AA003A4C9C /* EndPointType.swift */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0027435D737B5BF9CAA37E79 /* Pods_NutritLogin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NutritLogin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E4A6C5614EDEF4029C94554 /* Pods-NutritLogin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutritLogin.debug.xcconfig"; path = "Target Support Files/Pods-NutritLogin/Pods-NutritLogin.debug.xcconfig"; sourceTree = "<group>"; };
 		AF04F7442446ACD900A0A96A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AF04F7462447F2D300A0A96A /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		AF4C3F66245137AA003A4C9C /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		AF7DFD0A243C4A7500DFD370 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		AFB69A7D2454D08400DEDD07 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		AFB69A812454D0BB00DEDD07 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D0F804CF3CD14DCF3D4981E0 /* Pods-NutritLogin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutritLogin.release.xcconfig"; path = "Target Support Files/Pods-NutritLogin/Pods-NutritLogin.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +67,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F0AF8DE63C46DA6582D97AD /* Pods_NutritLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		358E1534F007611EB2A00684 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2E4A6C5614EDEF4029C94554 /* Pods-NutritLogin.debug.xcconfig */,
+				D0F804CF3CD14DCF3D4981E0 /* Pods-NutritLogin.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9375A47EDBC18336D0225B69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0027435D737B5BF9CAA37E79 /* Pods_NutritLogin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AF4C3F6324513710003A4C9C /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +136,8 @@
 			children = (
 				AF7DFCE3243C166C00DFD370 /* NutritLogin */,
 				AF7DFCE2243C166C00DFD370 /* Products */,
+				358E1534F007611EB2A00684 /* Pods */,
+				9375A47EDBC18336D0225B69 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,9 +219,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF7DFCF3243C167000DFD370 /* Build configuration list for PBXNativeTarget "NutritLogin" */;
 			buildPhases = (
+				C309BF5F08681580627147B9 /* [CP] Check Pods Manifest.lock */,
 				AF7DFCDD243C166C00DFD370 /* Sources */,
 				AF7DFCDE243C166C00DFD370 /* Frameworks */,
 				AF7DFCDF243C166C00DFD370 /* Resources */,
+				2DCFD1CFD9F5A2F333C635A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +279,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2DCFD1CFD9F5A2F333C635A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NutritLogin/Pods-NutritLogin-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NutritLogin/Pods-NutritLogin-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NutritLogin/Pods-NutritLogin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C309BF5F08681580627147B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NutritLogin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AF7DFCDD243C166C00DFD370 /* Sources */ = {
@@ -420,6 +489,7 @@
 		};
 		AF7DFCF4243C167000DFD370 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E4A6C5614EDEF4029C94554 /* Pods-NutritLogin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -438,6 +508,7 @@
 		};
 		AF7DFCF5243C167000DFD370 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0F804CF3CD14DCF3D4981E0 /* Pods-NutritLogin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
